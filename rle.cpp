@@ -8,6 +8,9 @@ i.e. runs of more than 10 should be split up.
 
 using namespace std;
 
+
+
+
 string runLengthEncoding(string str) {
   // Write your code here.
   string ans;
