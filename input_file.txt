@@ -1,0 +1,12 @@
+
+2
+25 75
+1000 24 
+
+Hi, My name is Harshit
+
+This is an input file.
+
+This is the third line of the input file.
+
+

@@ -1,0 +1,12 @@
+
+
+Note how much better stringstream is from strtok.
+
+So why do we need strtok? 
+
+Using strtok you can specify other delimiters like "$" which is not possible for stringstream.
+
+Bottom line : if the delimiter is " " (i.e. space) ---- use stringstream
+
+Use strtok only for some fancy input processing!
+
