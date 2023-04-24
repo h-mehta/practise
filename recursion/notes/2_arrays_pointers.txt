@@ -1,0 +1,133 @@
+
+Consider the code:
+
+-----------------------------------
+#include <iostream>
+using namespace std;
+
+int main(){
+
+	int a[10];
+
+	cout << a << endl;	// Line 1
+	cout << &a[0] << endl;	// Line 2	
+
+	return 0;
+}
+-----------------------------------
+
+Note: 
+----
+
+1) Line 1 and Line 2 print samething
+
+a points to starting address of the array which is the address of a[0]
+
+a is effectively the address of a[0]
+or
+a is &a[0]
+
+2) Pointer arithmetic:
+
+-----------------------------------------
+	int a[10];
+	
+	a[0] = 5;
+	a[1] = 10;
+
+	cout << *a << endl;	// Line 3
+	cout << *(a+1) << endl; // Line 4
+
+-----------------------------------------
+
+if a[0] is stored at 200
+then a[1] will be stored at 204 (assuming int is of 4 bytes)
+
+*a ----> refers to value at memory location 200
+
+*(a+1)
+ |___|	
+   '---> since a is of int type, 'a' gets incremented by 1*4 and (a+1_ refers to memory location 204.
+
+
+
+
+3) Difference in pointer and array.
+
+	- sizeof operator
+
+	Let's consider:
+		int a[10];
+		int *p;
+
+		cout << sizeof(a) << endl; 	// 40 - Line 5
+		cout << sizeof(p) << endl;	// 8  - Line 6
+
+	Explanation:
+		Line 5 - 
+			In symbol table 'a' will be stored as an array of 10 integers, with 'a' pointing to &a[0]. But symbol table maintains the information that 'a' is an array of 10 integers and hence 4 bytes * 10 = 40 bytes
+
+		Line 6 -
+			A pointer is generally assigned 8 bytes.
+
+		Why the difference?
+
+			When we do "a[10]" then "a" gets allocated 40 bytes and "a" points to start of the array.
+
+			Whereas when we do "int *p" - a separate 8 bytes was allocated for "p". No such seperate memory was allocated for "a".
+
+
+
+
+4) Difference 2 in pointer and array.
+
+	- Address of operator
+
+		Let's consider:
+
+			int a[10];
+ 			int *p = &a[0];
+
+			// Let's assume a[0] is stored at 200
+			// Let's assume p is stored at 780
+
+			cout << a ; 	// prints 200
+			cout << &a ; 	// prints 200
+
+			cout << p ; 	// prints 200
+					// remember that p = &a[0]
+
+			cout << &p ; 	// prints 780
+
+		Note:
+			 
+			How "a" and "&a" print the same thing.
+			Unlike "p" and "&p".
+
+
+
+
+5) Difference 3 in pointer and array.
+
+	- Assignment operation
+
+		Let's consider:
+                        
+                        int a[10];
+                        int *p = &a[0];
+
+			a = a + 1; // NOT ALLOWED
+
+			p = p + 1; // ALLOWED
+
+		Explanation:
+		
+			"a" contains address of a[0] and is stored in the symbol table.
+			Whereas, "p" has 8 bytes of memory to store any address hence we can reassign "p" to point to any address.
+
+
+NOTE: ALL THE DIFFERENCES are because "a" was not assigned any extra space to store value of a[0] --- "a" is stored in the symbol table and will always point to fixed memory location.
+
+	"p" is assigned a memory location - the memory location at which we store the address of some other variable - so the contents of this memory address can always be changed!
+
+

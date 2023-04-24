@@ -1,0 +1,82 @@
+
+When we write a statement like:
+
+	int i = 10;	// Example used in this text
+
+how does the compiler know where memory addressed by 'i' is stored?
+
+the mapping of symbol and the corresponding address is maintained in the Symbol table by the OS (made at compile time)
+
+If we want we can fetch what is the corresponding address of the variable from the symbol table - 
+
+
+
+1. We can fetch the corresponding address of variable using the "address of" operator ( & ).
+
+		Usage: &i  ----> returns address pointed to by i
+		      |___|
+		        |
+		    	'----> Now if you want to store this
+			       address - we need special type of variables called pointers.
+	                                                                          --------
+
+
+2. So how do we make a pointer?
+
+	Let's say I want to store the address of 'i':
+
+	int i = 10; // Example
+	
+	Since 'i' is of "int" type, pointer also has to be of "int" type.
+
+	Syntax:
+		____________________
+		|   int* p = &i;   |
+		--------------------
+
+3. Can I access the value stored in the address location held by pointer?
+
+	Yes, through the dereferencing operator ( * ).
+
+	Usage: 
+		int i = 10;
+		int*  p = &i  ;  // Let's assume i is stored at location 700 
+	       |____|    |___|
+	          |        |
+		  |	   '----> this returns address of 'i'
+		  |
+		  '-------------> this specifies that the variable p is a pointer of integer type i.e. points to an int variable.
+
+		cout << *p   << endl ;
+		       |___|
+			 '----> p has 700 stored in it
+				*p is the value stored at 700 that is 10.
+
+4. Let's consider the code:
+
+		int i = 10 ;		// Let's say 'i' is stored at 600
+		int* p = &i ;		// Let's say 'p' is stored at 800
+
+	What's happening here?
+	
+	Let's think about the symbol table for a minute:  
+
+                i:      ________
+		        |  10  | 
+		        --------
+			   '----------> stored at address 600
+		
+		p: 	_________
+			|  600  |
+			---------
+			   '----------> stored at address 800			
+
+		Symbol table:
+		-------------
+
+		_____________________
+		| Symbol  | Address |
+		---------------------
+		|    i    |   600   |
+		|    p    |   800   |
+		--------------------- 
