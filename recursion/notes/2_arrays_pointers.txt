@@ -117,9 +117,13 @@ then a[1] will be stored at 204 (assuming int is of 4 bytes)
                         int *p = &a[0];
 
 			a = a + 1; // NOT ALLOWED
-
+			
 			p = p + 1; // ALLOWED
 
+			Thus:
+			- while we can do "p++" to access next element
+			- doing "a++" would give ERROR
+			
 		Explanation:
 		
 			"a" contains address of a[0] and is stored in the symbol table.
