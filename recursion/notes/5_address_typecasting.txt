@@ -1,0 +1,133 @@
+
+
+Why is the pointer syntax so complicated?
+
+e.g. int i = 10;
+     int* p = &i;
+
+	Why can't it just be like:
+		
+		pointer p = &i;
+
+	If pointers were implemented this easy way, it would have created problems during de-referencing.
+
+	Ohk so "p" would have contained an address but then how is it supposed to know how to read the bits or till where to read?
+
+	If "p" points to an integer type of variable, compiler would know it has to read 4 bytes.
+	 		    ------ 							 --------	
+	Whereas if "p" points to a double type of variable, compiler would know it has to read 8 bytes.
+				   ------						       --------
+	Also,
+
+	the data type also tells how to interpret the bytes.
+
+_______________________________________________________________________________________________________
+
+				TYPECASTING 
+				----------- 
+
+1. IMPLICIT TYPECASTING
+   --------------------
+
+Consider the code:
+
+#include <iostream>
+using namespace std;
+
+int main() {
+	int i = 65;
+	char c = i;
+	cout << c << endl; 
+}
+
+
+This is called IMPLICIT Typecasting as the compiler intself understood that you want to interpret the int as a char.
+
+Type casting means to cast one data type [ 'i' ] into another [ 'c' ].
+
+_____________________________________________________________________________________________
+
+
+2. EXPLICIT TYPECASTING
+   --------------------
+
+Consider the code:
+
+#include <iostream>
+using namespace std;
+
+int main() {		---
+        int i = 65;	  |
+        char c = i;	  |
+			  |---.
+	int *p = &i;	  |   |
+	char *pc = p;   ---   |
+}			      |
+   			      V
+			   The compiler won't understand 
+			   what we want. "p" points to an int
+			   which has 4 bytes but "pc" being a 
+			   character pointer, will only point to
+			   1 byte - so which byte should it be etc.
+			   The compiler doesn't know it and thus 
+			   will throw an error.
+
+------------------------------------------------------------------
+
+Let's explicitly tell the pointer that we are sure that we want to 
+read the int pointer as character pointer - using explicit typecasting.
+
+Consider the code:
+
+#include <iostream>
+using namespace std;
+
+int main() {           	            
+        int i = 65;      	 
+        char c = i;              
+                                 
+        int *p = &i;           __ 
+        char *pc = (char*)p;   __|---.  
+}                            	     |
+                              	     V
+				EXPLICIT TYPECASTING
+
+
+	So what must be happening now?
+
+	i consists of 4 bytes:
+				_____________
+			.----->	|0 |0 |0 |65|
+                        |  .--> '--'--'--'--'
+			|  |	 
+			p  pc	
+
+	So while "p" is going to read 4 bytes at a time,
+	"pc" would read 1 byte at a time.
+
+	Thus,
+		*pc should be equal to '\0' or null character.
+
+	But this is not the case.
+
+	Most of the systems are based on Little Endian architecture
+	which means lowest byte is placed first.
+
+	Thus "i" which is equal to 65 is actually stored as:
+	                 _____________
+                         |65|0 |0 |0 | 
+                         '--'--'--'--'
+
+	Now *pc would read 65, interpret it as A. As it is a char
+	pointer, it will keep reading till it encounters '\0' character
+	or 0. As "pc" moves to next byte, it will read 0 and stop.
+
+	Similarly,
+		*(pc+1) would need and print null.
+		*(pc+3) would need and print null.
+
+
+__________________________________________________________________________________________________
+
+
+

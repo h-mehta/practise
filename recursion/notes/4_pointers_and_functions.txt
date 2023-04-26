@@ -1,0 +1,69 @@
+
+
+Pointers and functions:
+----------------------
+
+Consider the below code:
+
+void incrementPointer(int *p) {
+	p = p + 1;
+}
+
+int main() {
+
+	int i = 10;
+	int* p = &i;
+
+	cout << p << endl;		// Line 1
+	incrementPointer( p );
+	cout << p << endl;		// Line 2
+}
+
+Will there be a difference in the output of Line 1 and Line 2?
+
+	Note that p is copied by value in the function incrementPointer and any changes to p would be changes to local copy of p
+	(Not to the value pointed by p)
+
+___________________________________________________________________
+
+
+Infact if I had something like:
+
+void increment(int *p) {
+        *p = *p + 1;
+}
+
+int main() {
+
+        int i = 10;
+        int* p = &i;
+
+        cout << *p << endl;              // Line 1
+        increment( p );
+        cout << *p << endl;              // Line 2
+}
+
+Now even though out here also we are passing the pointer by value,
+Since both the pointers refer to same location, any changes to contents of the locations will be reflected for both!
+
+Thus Line 1 - 10
+     Line 2 - 11
+
+___________________________________________________________________
+
+
+How do arrays get passed to functions?
+       ------            ------------
+
+As pointers.
+
+
+
+
+___________________________________________________________________
+
+
+
+
+
+ 
