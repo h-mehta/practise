@@ -123,8 +123,8 @@ int main() {
 	or 0. As "pc" moves to next byte, it will read 0 and stop.
 
 	Similarly,
-		*(pc+1) would need and print null.
-		*(pc+3) would need and print null.
+		*(pc+1) would read and print null.
+		*(pc+3) would read and print null.
 
 
 __________________________________________________________________________________________________

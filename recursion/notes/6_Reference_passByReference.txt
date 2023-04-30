@@ -1,0 +1,94 @@
+
+			REFERENCE Variables
+			-------------------
+
+Consider the code:
+
+	int i = 10;
+	int j = i;
+
+	What happened?
+
+	In memory we created two separate varaibles:
+
+			 i
+                         loc: 980
+                          _______________
+                          |     10      |
+                          ---------------
+
+			 j
+                         loc: 570
+                          _______________
+                          |     10      |
+                          ---------------
+	
+	But if I do something like:
+		
+			i++;
+
+	It will not impact j, as j is stored at another location.
+
+	What if I wanted "j" to refer to the actual value of "i"?
+	                 ---                 -------------------
+	(Basically we want another variable to point to same memory location)
+	
+	We use Reference variables to achieve this.
+	       -------------------
+
+	To make "j" a Reference variable, use declaration:
+	
+			int &j = i;
+
+
+
+	WHAT IS THE USE OF SUCH VARIABLES?
+	----------------------------------
+
+	BENEFIT 1:
+	---------
+
+	Earlier, I was passing through value, in which case a new
+	variable was created in the stack memory of called func.
+
+	Changes to this local variable were not getting reflected
+	in the main function (or calling function).
+
+	So let's pass the variable by reference.
+
+	NOTE: we are creating this "ALIAS" varaible:
+	----
+		int &j;  // NOT ALLOWED - this variable is an 
+					  "alias" of which var ?
+
+		Thus, initialization is a MUST when declaring Reference variables.
+
+	
+	void increment( int &j){	// basically does:
+					// int &j = i;
+		j = j+1;
+	}
+
+	int main() {
+
+		int i = 10;
+		increment(i); 		
+		cout << i << endl; 	// 11
+	}
+
+
+	BENEFIT 2:
+	---------
+
+	Didn't have to create new memory.
+
+	What if I am not making any changes to the variables? I still didn't need to create new memory.
+
+	Saving on time and memory.
+  
+	
+
+		
+
+
+

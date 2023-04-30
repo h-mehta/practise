@@ -1,0 +1,159 @@
+
+  			TYPES OF MEMORY
+  			---------------
+
+There are 2 types of memory:
+
+1. Stack Memory
+	aka Compile time static allocation
+
+2. Heap Memory
+	aka Runtime/Dynamic memory allocation
+
+
+Generally the memory being used is allocated in stack / decided at compile time.
+
+Now when a program starts, it knows the memory requirements, thus it
+allocates sufficient memory for stack.
+
+Thus something like:
+
+	int n;  	---.
+	cin >> n;	   |---.
+	int a[n];    	___|   |
+			       |
+			       V
+			Though this is allowed
+			by most compilers,
+			this is a bad practise.
+			Beacuse if n is very large,
+			it might need more memory 
+			than what is available in stack.
+
+
+Thus it's a better idea to assign memory from Heap (which is much 
+much larger than stack memory).
+
+The way we allocate memory from Heap is through the use of "new".
+
+E.g. 	new int; ----> allocates 4 bytes from Heap
+	|_____|
+	   |  
+	   '---------> this returns memory address 
+		       which can be stored in a pointer.
+
+E.g. 	int *p = new int;
+	*p = 10; ----------> This way we can store data
+			     in the memory allocated from Heap.
+
+E.g.	int* arr = new int[50];
+	|______|   |_________|
+           |            |
+	   |		'---------> 200 bytes allocated on Heap
+	   |
+	   '----------------------> 8 bytes allocated on stack to
+				    store the pointer
+
+
+
+
+	STATIC ALLOCATION 		DYNAMIC ALLOCATION
+
+	Consider the code:	 |      Consider the code: 
+				 |	
+	int main(){		 |	int main(){
+	   while(true){		 |	    while(true){  
+	  	int i=10;	 |		int* p = new int;
+	   }			 |	    }
+	}			 |	}
+				 |
+	The variable "i" has	 |	Now every time this loop
+	been allocated static-	 |	runs, a new block of 4 
+	ally, so as soon as	 |	bytes is allocated on heap.
+	"i" goes out of scope,	 |
+	which is as soon as 	 |	Unlike, statically allocated
+	while loop ends, the	 |	variables, heap allocated
+	memory allocated for	 |	variables are not deleted 
+	"i" on stack gets 	 |	when the pointer goes 
+	deallocated. So if the	 |	out of scope.
+	while runs for 10 times, |
+	4 bytes are allocated	 |	Thus allocate memory very
+	and deallocated on stack |	carefully on heap.
+	10 times.		 |	The above code will crash
+				 |	the computer as eventually
+				 |	Heap will go out of memory.
+	AUTOMATIC RELEASE	 |	
+	OF MEMORY ON BASIS OF	 |	MANUAL RELEASE IS REQUIRED.
+	SCOPE OF VARIABLES.	 |     
+				 
+
+
+	
+	DELETING DYNAMICALLY ALLOCATED MEMORY:
+	--------------------------------------
+
+	delete keyword - deallocates the memory pointed to by 
+			 the pointer.
+
+
+
+	SINGLE ELEMENT DELETION:
+	-----------------------
+
+	int *p = new int;
+	delete p;------------> deletes the memory allocated
+			       note that the memory gets 
+			       deallocated; the pointer can still
+			       be used.
+	p = new int; --------> Reusing the pointer 
+
+
+	
+	ARRAY DELETION:
+	--------------
+
+	int *p = new int[50];
+	delete  []  p; 
+	       |__|
+		'-----------> To specify we are deleting an array. 
+
+
+	REMEMBER:
+	--------
+
+	On deleting a dynamic memory, if the pointer is not modified
+	the pointer still points to the same deleted memory location
+	
+	So if you try to read from that location, it might have 
+	been overwritten - and would read in garbage.
+
+	Better to assign the pointer to NULL.
+
+
+
+2D ARRAY DYNAMIC MEMORY ALLOCATION
+----------------------------------
+
+Sadly, there is no syntax like:
+	new int[10][20];
+
+So, how do we create 2D arrays then?
+	
+	int** arr = new int*[row];
+
+        for(int i=0; i<row; i++) {
+                arr[i] = new int[col];
+        }
+
+
+How to release the memory?	
+
+	for(int i=0; i<row; i++) {
+		delete [] arr[i]; 	//to delete ith row
+	}	
+
+	delete [] arr;			//to delete pointer array
+
+
+
+

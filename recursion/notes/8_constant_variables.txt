@@ -1,0 +1,64 @@
+
+
+
+			CONSTANT VARIABLES
+			------------------
+
+Syntax:
+	const int i = 10;
+
+	Note: 
+	----
+		It is mandatory to initialise the constant variable 		    during declaration.
+		(just how it is mandatory to initialise reference
+		variables when declaring them)
+
+		Once initialised, we can not change the value of
+		constant variable.
+
+
+Consider the code:
+	
+	int j = 12;
+	const int & k = j;
+	k++;			// NOT ALLOWED
+	j++;			// ALLOWED
+
+
+	What's happening here?
+
+	- When we are making the variable j, compiler allocates
+	  a 4 byte memory - let's say at location 800 - which can
+	  be accessed using the variable j.
+
+	        Symbol		Memory
+		Table		
+
+		j-->800  	__________
+			  	|   12   |
+			  	'--------'
+			  	loc: 800
+	
+	- Then, we declared another variable, a constant variable, k
+	  which points to the same memory location.
+
+	- Yet we are allowed to change the contents of memory 
+	  location 800 through j but not through k. 
+
+	  This means when I make a variable constant -
+
+		We are NOT making the MEMORY pointed by it a CONST
+		       ---            ------                 ----
+
+		But only saying that the memory location cannot be 
+		changed through this path / variable ( i.e. k ) 
+
+		Which means it can certainly be changed by other
+		path / variable ( like j )
+
+		ALWAYS remember ----> PATH is constant
+			|			      
+			'-----------> Actual storage is NOT constant
+	
+		
+
