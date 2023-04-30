@@ -1,0 +1,27 @@
+
+INBUILT FUNCTIONS for C style strings
+-------------------------------------
+
+
+
+	   .-----------.
+Library:   |  cstring  |
+-------	   `-----------'
+
+
+
+1. Length ---------> strlen
+
+	Usage:
+		char arr[100];
+		cin >> arr ;
+		int len = strlen( 
+
+	 
+
+
+
+
+
+
+

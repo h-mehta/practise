@@ -1,0 +1,41 @@
+
+Few important points :
+
+1. cin breaks at new line, tab and space
+
+2. In order to take as input strings that have spaces in them use cin.getline()
+
+		Syntax : 	cin.getline( string_name , length )
+
+		Example:	string str1;
+				cin.getline( str1 , 100 )
+					      |
+					      '----> can now store "Hello world" in str1 !!!
+
+	Important Note:
+	
+	a. Consider the following code:
+
+					char arr[100]
+					cin.getline( arr , 10 );
+						     |______|
+							'--------> We have told the compiler that my input is 10 chars long
+								   But since last character of char array is always null character or '\0'
+								   It will store only the first 9 characters in arr and 10th character will be '\0'
+	
+	
+	b. 3rd & optional parameter to cin.getline is the delimiter:
+	   By default delimiter is '\n'
+		
+		Syntax : 	cin.getline( string_name , length , delimiter )
+
+		Example: 	cin.getline( arr , 10 , '$' );	
+					      |__________|
+					 	   '--------> will take as input 10 characters - 9 from user and 10th as '\0'
+							      also if it encounters '$' it will stop before
+							      if input is "abcd$efg" ---> arr will store:
+												_____________________
+												| a | b | c | d | \0 |
+												'---'---'---'---'----'
+
+

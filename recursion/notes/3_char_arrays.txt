@@ -1,0 +1,111 @@
+Note that out of all the data types, char arrays behave differenlty from others.
+
+Let's go over the differences.
+
+Consider the example:
+
+-------------------------------------------------------------
+int main(){
+
+	int a[] = {1,2,3};	// let's assume &a[0] is 200
+	char b[] = "abc";
+
+	cout << a << endl; 	// 200
+	cout << b << endl;	// abc --> Note: did not print the address but infact the contents
+
+}
+-------------------------------------------------------------
+
+This is because cout gives different treatment to char arrays and pointers.
+
+Consider the code:
+
+-------------------------------------------------------------
+int main(){
+		
+	char b[] = "abc";
+	char* c = &b[0];
+
+	cout << c << endl; 				
+	
+}
+-------------------------------------------------------------
+
+the above will print the contents of b.
+
+This is because in case of character pointer, cout keeps printing till it encounters '\0'.
+
+This can also lead to unexpected behaviour, for example:
+
+Consider the code:
+
+-------------------------------------------------------------
+int main(){
+
+        char c1 = 'a';
+	char* c = &c1;
+
+        cout << c << endl;
+
+}
+-------------------------------------------------------------
+
+Now cout keeps printing starting from the location pointed to by the char pointer - till it finds '\0'.
+
+This the output for above code could be something like:
+
+a$%@fre}
+ |_____|'------------> must have encountered null charcater
+    |
+    '----------------> Garbage values
+
+
+
+Now, a very IMPORTANT difference in char pointer and char array:
+	    --------------------    ------------     ----------
+
+	char str[] = "abcde";	// Line 1
+	char* pstr = "abcde";	// Line 2
+
+
+What is happening in Line 1?
+
+	Whenever we write a string literal like "abcde"
+
+	First of all the system creates a temporary memory for the 
+	string literal.
+
+	In Line 1, since I have created an array - new memory is
+	allocated just to store the string literal and the contents
+	of temporary memory are copied into the allocated space
+	pointed to by the arrray.
+
+
+					temporary memory
+					loc: 980
+					_______________
+					|   "abcde\0" |
+					---------------
+						|
+						|	
+	  str[]	_______________ <---------------' copied
+		|   "abcde\0" |
+                ---------------
+		loc: 800
+
+
+What is happening in Line 2?
+
+	The character pointer is pointing to temporary memory
+	space - it's a read only space - don't know for sure
+	how it is managed - can give unexpected results. 
+	
+	Bad Practise
+	------------
+
+		pstr  ---------------->	temporary memory
+                                        loc: 980
+                                        _______________
+                                        |   "abcde\0" |
+                                        ---------------		   
+
