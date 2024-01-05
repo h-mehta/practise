@@ -1,0 +1,47 @@
+What kind of problems are solved with DSU :
+-   Add elements to same set?
+-   Are 2 elements in the same set?
+
+DSU generally implemented using trees.
+                                -----
+
+DSU is also called Union-Find -> 2 operations:
+- Find : 
+    - Each set is represented by candidate node
+    - Given a node, find the candidate node this node belongs to?
+
+    For example,
+        Let's say 1,2,5 are in same set and candidate node is 2.
+        Given node 5 - we have to return what is the candidate node (i.e. 2)
+
+- Union :
+    - Given two sets, combine them into same set
+    - E.g. 
+        Let set 1 be 1,2,5 and set 2 be 3,4
+        Union means to combine both sets into one set and assign a single candidate node for the new set
+
+        How is it done?
+
+        Originally:
+
+            Set 1         Set 2
+
+             2              3
+            / \             |
+           1   5            4
+
+        In set 1, 2 is the candidate node and in set 2, 3 is the candidate node.
+        generally the candidate node becomes the root of the tree.
+
+        Thus we can merge in the following way:
+
+             2 ---.              
+            / \   |          
+           1   5  3
+                  |
+                  4
+        
+        Now candidate node is 2 for these nodes
+        
+
+
